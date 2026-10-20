@@ -3,11 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="0; url=https://tamantineebruno-arch.github.io/escudo-links/ativar/">
-<title>Redirecionando...</title>
-<script>location.replace("https://tamantineebruno-arch.github.io/escudo-links/ativar/");</script>
+<title>Placa p002 — Almeida Soluções Digitais</title>
+<style>
+  body { font-family: sans-serif; background: #08060E; color: #fff; text-align: center; padding: 40px 22px; margin: 0; }
+  h1 { color: #A855F7; font-size: 30px; margin-bottom: 6px; }
+  .placa { font-size: 19px; color: #AAA5B9; margin-top: 0; }
+  .passos { text-align: left; max-width: 430px; margin: 22px auto; font-size: 17px; line-height: 1.55; }
+  .btn { display: block; background: #7C3AED; color: #fff; font-size: 21px; font-weight: bold; padding: 17px; border-radius: 12px; text-decoration: none; max-width: 430px; margin: 24px auto; }
+  .cliente { color: #AAA5B9; font-size: 15px; max-width: 430px; margin: 28px auto 0; line-height: 1.5; }
+  #carregando { font-size: 19px; padding-top: 60px; }
+</style>
 </head>
-<body style="font-family:sans-serif;text-align:center;padding-top:40px">
-<p>Redirecionando...<br><a href="https://tamantineebruno-arch.github.io/escudo-links/ativar/">clique aqui se nao abrir automaticamente</a></p>
+<body>
+<div id="carregando"><p>Um instante…</p></div>
+
+<div id="config" style="display:none">
+  <h1>Configurar placa</h1>
+  <p class="placa">Placa <b>p002</b> — ainda sem destino</p>
+  <div class="passos">
+    <p><b>Vendeu esta placa?</b> Configure em 30 segundos:</p>
+    <p>1. Toque no botão roxo abaixo (abre a lista);<br>
+       2. Na primeira linha vazia, escreva:<br>
+       <b>p002</b> | nome da loja | link do Google da loja<br>
+       3. Pronto — pode fechar. Em ~1 minuto a placa já aponta pra loja.</p>
+  </div>
+  <a class="btn" href="https://docs.google.com/spreadsheets/d/1OglV7T9JT4p7HzXNF_PIwPtpUmP--4AJmqmOElYUnng/edit" target="_blank" rel="noopener">ABRIR A LISTA</a>
+  <p class="cliente">É cliente desta loja? Esta placa está sendo ativada pelo estabelecimento — volte em instantes!</p>
+</div>
+
+<script>
+var PLACA = "p002";
+function mostrar() {
+  document.getElementById("carregando").style.display = "none";
+  document.getElementById("config").style.display = "block";
+}
+function __cb(resp) {
+  try {
+    var rows = (resp.table && resp.table.rows) || [];
+    for (var i = 0; i < rows.length; i++) {
+      var c = rows[i].c || [];
+      var placa = c[0] && c[0].v != null ? String(c[0].v).trim().toLowerCase() : "";
+      var dest  = c[2] && c[2].v != null ? String(c[2].v).trim() : "";
+      if (placa === PLACA && dest) { location.replace(dest); return; }
+    }
+  } catch (e) {}
+  mostrar();
+}
+setTimeout(function() {
+  if (document.getElementById("carregando").style.display !== "none") mostrar();
+}, 8000);
+var s = document.createElement("script");
+s.src = "https://docs.google.com/spreadsheets/d/1OglV7T9JT4p7HzXNF_PIwPtpUmP--4AJmqmOElYUnng/gviz/tq?tqx=out:json;responseHandler:__cb&headers=0&_=" + Date.now();
+s.onerror = mostrar;
+document.head.appendChild(s);
+</script>
+<noscript><p>Ative o JavaScript ou abra a lista: <a style="color:#A855F7" href="https://docs.google.com/spreadsheets/d/1OglV7T9JT4p7HzXNF_PIwPtpUmP--4AJmqmOElYUnng/edit">abrir a lista</a></p></noscript>
 </body>
 </html>
